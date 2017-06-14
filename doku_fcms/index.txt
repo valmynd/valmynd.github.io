@@ -10,7 +10,7 @@
 # Python, Django und feinCMS mit CKEditor auf Windows Server 2012 R2 64Bit
 
 - English:
-	- [Usage](2. Nutzung/usage.html)
+	- [Usage](2. Nutzung/Usage.html)
 	- [Embedding Pages on other Websites](3. Einbinden in andere Webseiten/Embedding.html)  
 	- [Development](4. Weiterentwicklung/Development.html)
 

@@ -1,0 +1,21 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="markdown.css"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+# Einbinden auf einer anderen Webseite via Iframe
+
+- folgenden HTML-Schnipsel auf einer anderen Webseite einfügen:
+	
+	```highlight
+	<iframe style="width: 100%; height: 100%" src="http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse/?embed=true"></iframe>
+	```
+
+	- anstatt Größe und Breite 100%, können auch beliebige andere Werte gegeben werden, z.B. **style="width: 700px; height: 200px"**
+	- anstatt **http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse** lassen sich auch beliebige andere URL's angeben, wichtig ist nur das **/?embed=true** am Ende
+		- das **/?embed=true** am Ende der URL sorgt dafür, dass die Navigationsleiste und der Footer nicht mit zu sehen sind
+		- sollte es explizit gewünscht sein, dass die Navigationsleiste mit zu sehen ist, lässt sich **/?embed=true** einfach weglassen

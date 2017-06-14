@@ -1,0 +1,170 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" type="text/css" href="markdown.css"></link>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+<h1 id="wie-gelange-ich-zum-admin-bereich">Wie gelange ich zum Admin-Bereich?</h1>
+<ul>
+<li>Im Browser die URL mit /admin/ ergänzen und aufrufen</li>
+<li>Beispiel: <a href="http://scrctestv2.wifa.uni-leipzig.de/admin/">http://scrctestv2.wifa.uni-leipzig.de/admin/</a></li>
+</ul>
+<h1 id="eine-seite-bearbeiten">1. Eine Seite bearbeiten</h1>
+<h2 id="wählen-sie-im-admin-bereich-den-bereich-pages">1.1 Wählen Sie im Admin-Bereich den Bereich <em>Pages</em>:</h2>
+<div class="figure">
+<img src="BearbeitenStep1.png" />
+</div>
+<h2 id="klappen-sie-die-baumansicht-für-die-gewünschte-sprache-auf">1.2 Klappen Sie die Baumansicht für die gewünschte Sprache auf:</h2>
+<div class="figure">
+<img src="BearbeitenStep2.png" />
+</div>
+<h2 id="wählen-sie-die-zu-bearbeitende-seite">1.3 Wählen Sie die zu bearbeitende Seite:</h2>
+<div class="figure">
+<img src="BearbeitenStep3.png" />
+</div>
+<ul>
+<li>Sie können entweder die Seite in der Sprache wählen, die im aktuellen Pfad der Baumstruktur aktiv ist (<strong style="color:red">1</strong>) - in diesem Fall Deutsch - oder eine der Übersetzungen auswählen (<strong style="color:red">2</strong>)
+<ul>
+<li>ist der Link zur Übersetzung (<strong style="color:red">2</strong>) ausgegraut, ist noch keine Übersetzung vorhanden, Sie können aber auch diese Links anklicken um eine entsprechende Übersetzung anzulegen</li>
+</ul></li>
+</ul>
+<h2 id="nehmen-sie-die-gewünschten-änderungen-vor">1.4 Nehmen Sie die gewünschten Änderungen vor</h2>
+<div class="figure">
+<img src="BearbeitenStep4.png" />
+</div>
+<ul>
+<li>(<strong style="color:red">1</strong>): In diesem Abschnitt können Sie den Titel für die Seite anlegen (erscheint so in der Navigation auf der Seite sowie als Beschriftung des Browser-Tabs) sowie ein Kürzel (Slug), welches Bestimmt, wie die URL zu dieser Seite zusammengesetzt wird. Handelt es sich beispielsweise um eine Unterseite von &quot;Rückblick&quot; (Kürzel: rueckblick), welches wiederum eine Unterseite von &quot;Deutsch&quot; ist (Kürzel: de), lautet der Pfad der URL am Ende <strong>/de/rueckblick/&lt;Slug&gt;</strong>.
+<ul>
+<li>weiterhin lassen sich Häkchen setzen für &quot;Active&quot; (legt fest, ob diese Seite im Web erreichbar sein soll) und &quot;Navigation&quot; (legt fest, ob diese Seite in der Navigation mit auftauchen soll (nicht immer gewollt, beispielsweise für Unterseiten!))</li>
+</ul></li>
+<li><p>(<strong style="color:red">2</strong>): Diese Bereiche lassen sich durch einen Klick aufklappen und sind insbesondere zum Erstellen neuer Seiten relevant, weswegen sie unter 2.2 näher erklärt werden. Eine Ausnahme ist der Bereich Search Engine Optimizations (SEO) - under diesem Bereich können Sie Schlagworte und einen Beschreibungstext für Google/Facebook/etc. angeben.</p></li>
+<li><p>(<strong style="color:red">3</strong>): Hier lässt sich zwischen Abschnitten innerhalb der Seite wechseln, was evtl. schnell übersehen wird. Auf den meisten Seiten gibt es jeweils einen Bereich für grauen Hintergrund und einen mit weißem Hintergrund. Für die Startseite gibt es einen Bereich um das Startbild festzulegen. Ausschlaggebend dafür, welche Bereiche es gibt, sind die von Entwicklern angelegten Templates (siehe Entwickler-Dokumentation).</p></li>
+<li><p>(<strong style="color:red">4</strong>): Dies enthält den eigentlichen Content der Seite. Sie können mit dem Richtext-Editor, der im Screenshot zu sehen ist, arbeiten oder auf die Source-Ansicht wechseln.</p></li>
+<li><p>(<strong style="color:red">5</strong>): Es lassen sich weitere Bestandteile zum aktuellen Bereich hinzufügen - je nach Template z.B. Kontaktformulare oder weitere Richtext-Felder.</p></li>
+<li>(<strong style="color:red">6</strong>): Beim Speichern besteht die Auswahl zwischen
+<ul>
+<li>Speichern und eine weitere Seite vom gleichen Typ anlegen</li>
+<li>Speichern ohne die aktuelle Seite zu verlassen</li>
+<li>Speichern und zur Baumansicht zurückkehren</li>
+</ul></li>
+<li><p>(<strong style="color:red">7</strong>): Es gibt die Möglichkeit, die History einzusehen - wichtig um etwa Änderungen rückgängig zu machen (!) - und die aktuelle Seite in einem neuen Fenster anzeigen zu lassen, so wie sie am Ende tatsächlich für Dritte zu sehen ist.</p></li>
+</ul>
+<h1 id="anlegen-neuer-seiten">2. Anlegen neuer Seiten</h1>
+<h2 id="klicken-sie-im-pages-bereich-auf-add-page">2.1 Klicken Sie im <em>Pages</em>-Bereich auf <em>Add Page</em></h2>
+<div class="figure">
+<img src="AnlegenStep1.png" />
+</div>
+<h2 id="nehmen-sie-die-gewünschten-einstellungen-vor">2.2 Nehmen sie die gewünschten Einstellungen vor</h2>
+<div class="figure">
+<img src="AnlegenStep2.png" />
+</div>
+<ul>
+<li><p>(<strong style="color:red">1</strong>): Hier legen Sie Titel und Kürzel für die Seite fest, sowie ob die Seite aktiv, also für Dritte aufrufbar, und ob sie in der Navigation zu sehen sein soll.</p></li>
+<li><p>(<strong style="color:red">2</strong>): Diese Bereiche lassen sich durch einen Klick aufklappen:</p>
+<ul>
+<li><div class="figure">
+<img src="Advanced1.png" />
+</div>
+<ul>
+<li><strong>Template:</strong> Legen Sie hier das Template für die Seite fest
+<ul>
+<li>Templates werden von Entwicklern erstellt (siehe Entwicklerdokumentationen)
+<ul>
+<li>sie enthalten eine grobe Aufteilung in Bereiche auf der Seite, sowie in der Regel auch die Navigation sowie einen Footer</li>
+<li>wollen Sie eine speziellere Aufteilung, muss ein neues Template erstellt werden (im Quellcode der Django-App)</li>
+</ul></li>
+<li>für die Startseite und die Praktikumsbörse gibt es jeweils Extra-Templates</li>
+<li>die Pfade /de/, /en/ und /br/ entsprechen Weiterleitungsseiten und haben das Redirect-Template</li>
+<li>alle anderen Seiten, also mit hoher Wahrscheinlichkeit auch die, die Sie anlegen wollen, haben das Default-Template</li>
+</ul></li>
+<li><strong>Parent:</strong> Hier wird die übergeordnete Seite festgelegt, meist ist dies einer der Wurzelknoten (Deutsch, Englisch oder Portugiesisch)
+<ul>
+<li>klicken Sie hierfür auf das Lupensymbol und wählen aus, wozu die Seite, die sie anlegen möchten, Unterseite sein soll</li>
+</ul></li>
+<li>die weiteren Formularfelder werden nur in sehr speziellen Fällen benötigt
+<ul>
+<li>die Startseite hat als <strong>Override URL</strong> den Pfad <strong>&quot;/&quot;</strong> - wollen Sie, dass statt der gegenwärtigen Default-Sprache eine andere Seite als solche haben, entfernen Sie den Eintrag in der bisherigen Startseite, bevor Sie hier <strong>&quot;/&quot;</strong> eintragen</li>
+</ul></li>
+</ul></li>
+<li><div class="figure">
+<img src="Advanced2.png" />
+</div>
+<ul>
+<li><strong>Require Login:</strong> Hier können Sie einen Nutzer festlegen, der eingeloggt sein muss, um die Seite sehen zu können.</li>
+</ul></li>
+<li><div class="figure">
+<img src="Advanced3.png" />
+</div>
+<ul>
+<li>Hier können Sie Schlüsselwörter und einen Beschreibungstext für Suchmaschinen festlegen. Diese Festlegungen sind auch für die Share-Buttons von Facebook o.Ä. wichtig, da man den Beschreibungstext u.U. auch sehen kann, wenn man auf diese klickt.</li>
+</ul></li>
+</ul></li>
+<li>(<strong style="color:red">3</strong>): Hier lässt sich zwischen Abschnitten innerhalb der Seite wechseln
+<ul>
+<li>im Standard-Template gibt es z.B. einen Bereich für grauen Hintergrund und einen mit weißem Hintergrund</li>
+</ul></li>
+<li><p>(<strong style="color:red">4</strong>): Neu angelegte Seiten enthalten zunächst ersteinmal keinen Content (bzw. Content-Bereiche).</p></li>
+<li><p>(<strong style="color:red">5</strong>): Fügen Sie hier Bestandteile zum aktuellen Bereich hinzu.</p></li>
+<li>(<strong style="color:red">6</strong>): Beim Speichern besteht die Auswahl zwischen
+<ul>
+<li>Speichern und eine weitere Seite vom gleichen Typ anlegen</li>
+<li>Speichern ohne die aktuelle Seite zu verlassen</li>
+<li>Speichern und zur Baumansicht zurückkehren</li>
+</ul></li>
+</ul>
+<h1 id="eine-seite-übersetzen">3. Eine Seite übersetzen</h1>
+<ul>
+<li>Zum Bearbeiten einer bereits existierenden Übersetzung können Sie der gleichen Schrittfolge wie unter <em>1. Eine Seite bearbeiten</em> folgen</li>
+</ul>
+<h2 id="anlegen-einer-neuen-übersetzung">3.1 Anlegen einer neuen Übersetzung:</h2>
+<div class="figure">
+<img src="Translate1.png" />
+</div>
+<ul>
+<li>Wählen Sie die Sprache aus, in die sie übersetzen wollen (hier z.B. Englisch).</li>
+</ul>
+<h2 id="checken-der-wichtigsten-einstellungen">3.2 Checken der wichtigsten Einstellungen:</h2>
+<div class="figure">
+<img src="Translate2.png" />
+</div>
+<ul>
+<li><p>(<strong style="color:red">1</strong>): Legen Sie den übersetzten Titel fest</p></li>
+<li><p>(<strong style="color:red">2</strong>): Stellen Sie sicher, dass die gewünschte übergeordnete Seite eingestellt ist - standardmäßig verschiebt es die Übersetzung schon initial in den richtigen Wurzelknoten, aber es könnte ja sein, dass es die Unterseite von etwas Anderem sein soll</p></li>
+<li><p>für alles Weitere sind die Voreinstellungen i.d.R. bereits sinnvoll gesetzt</p></li>
+<li><p>(<strong style="color:red">3</strong>): Wie Sie sehen, ist bereits Standardmäßig das Häkchen neben &quot;Copy content from the original&quot; gesetzt. Klicken Sie auf &quot;Save and continue editing&quot;, dann erscheinen an dieser Stelle die Inhalte der zu übersetzenden Seite.</p></li>
+</ul>
+<h2 id="übersetzen-der-inhalte">3.3 Übersetzen der Inhalte:</h2>
+<div class="figure">
+<img src="Translate3.png" />
+</div>
+<ul>
+<li>Zu übersetzen ist i.d.R. Content und SEO (Beschreibungstext)</li>
+</ul>
+<h1 id="ändern-der-reihenfolge-in-der-navigation">4. Ändern der Reihenfolge in der Navigation</h1>
+<div class="figure">
+<img src="Move.png" />
+</div>
+<ul>
+<li>Gehen Sie mit der Linken Maustaste auf den markierten Button und verschieben Sie die Seite innerhalb der Baumstruktur via Drag-and-Drop</li>
+</ul>
+<h1 id="anmerkungen-zum-richtext-editor">5. Anmerkungen zum Richtext-Editor</h1>
+<div class="figure">
+<img src="CK.png" />
+</div>
+<ul>
+<li>(<strong style="color:red">1</strong>): Mittels Richtext-Templates können grundsätzliche Layouts festgelegt werden (z.B. 3-Spalten-Layout, Bilder mit umfließenden Text)
+<ul>
+<li>die Darstellung der Seite im Richtext-Editor selbst unterscheidet sich übrigens teils deutlich von dem, wie es am Ende auf der Seite aussieht. Es empfielt sich, regelmäßig das Ergebnis auf der tatsächlichen Webseite anzuschauen.</li>
+<li>Bei der Arbeit mit mehrspaltigen Layouts empfielt es sich, den Editor-Bereich sehr weit in die Breite zu ziehen (rechte untere Ecke).</li>
+</ul></li>
+<li>(<strong style="color:red">2</strong>): In der Source-Ansicht kann das HTML händisch angepasst werden. Es empfielt sich dabei, den HTML-Quellcode in eine richtige IDE mit Unterstützung für automatisches Einrücken und Syntax-Hervorhebung zu wechseln (z.B. Webstorm oder Eclipse), insbesondere weil die Einrückung nach dem Speichern mit dem Richtext-Editor verloren geht und damit unübersichtlich wird!
+<ul>
+<li>grundsätzlich ist der Richtext-Editor eher für sehr typische Änderungen gedacht, Sonderwünsche erfordern oftmals Änderungen im HTML-Quelltext</li>
+</ul></li>
+<li><p>(<strong style="color:red">3</strong>): Das Style-Dropdown bietet eine Auswahl von Styles für Überschriften.</p></li>
+<li>(<strong style="color:red">4</strong>): Es lassen sich Bilder hinzufügen. Die Bilder werden in einem Anderen Admin-Bereich verwaltet, nämlich unter <em>Medien</em>:
+<ul>
+<li><img src="Medien.png" /></li>
+<li>(Bilder von der alten Webseite sind nicht im <em>Medien</em>-Bereich eingepflegt, sondern liegen im Static-Ordner der Django-App)</li>
+<li>Bilder lassen sich Kategorien zuordnen. Die Kategorien können im Admin-Bereich unter <em>Kategorien</em> verwaltet werden</li>
+</ul></li>
+</ul>

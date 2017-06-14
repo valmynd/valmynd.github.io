@@ -1,0 +1,21 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="markdown.css"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+# Embedding Pages on other Websites (e.g. Facebook) via Iframe
+
+- add the following HTML-Snippet on other Websites:
+	
+	```highlight
+	<iframe style="width: 100%; height: 100%" src="http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse/?embed=true"></iframe>
+	```
+
+	- instead of having Width and Height set to 100%, you can choose any desired Value, e.g. **style="width: 700px; height: 200px"**
+	- instead of **http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse** you can choose any other URL, important is only having it end with **/?embed=true** if you want to hide the navigation
+		- having **/?embed=true** in the URL on our Website results in having the Navigation-Bar and the Footer to be hidden
+		- if you actually wish to have the Navigation-Bar and the Footer to be shown within the Iframe, simply omit the **/?embed=true**

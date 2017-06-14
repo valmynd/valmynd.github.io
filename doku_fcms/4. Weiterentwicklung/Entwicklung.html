@@ -1,0 +1,130 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" href="markdown.css"></link>
+<script src="highlight.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+
+<h1 id="allgemeine-hinweise">Allgemeine Hinweise:</h1>
+<ul>
+<li><p>das Git-Repository befindet sich <a href="https://bitbucket.org/valmynd/django_scrm/commits/all">hier</a> - bitte anfragen für Zugänge, da nicht öffentlich.</p></li>
+<li>in dieser Anleitung wird nur das gröbste erklärt
+<ul>
+<li>oft reichen evtl. kleinere Anpassungen an Templates oder statischen Dateien</li>
+<li>falls dies nicht ausreicht, sei hier an die Dokumentationen der verwendeten Frameworks verwiesen</li>
+<li>Kommando-Zeilen-Befehle in dieser Anleitung beziehen sich auf Ubuntu, für andere Betriebssysteme sind diese entsprechend anzupassen</li>
+</ul></li>
+<li>wir empfehlen <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> als IDE</li>
+<li><p>mit folgenden Befehlen bekommen Sie Django lokal zum laufen:</p>
+<pre class="highlight"><code>sudo pip3 install django
+sudo pip3 install feincms
+sudo pip3 install django-reversion
+sudo pip3 install django-guardian
+sudo pip3 install django-bootstrap-form
+
+git clone https://bitbucket.org/valmynd/django_scrm.git &amp;&amp; cd django_scrm
+
+python3 manage.py migrate
+python3 manage.py collectstatic &lt;&lt;&lt; &#39;yes&#39;
+python3 manage.py loaddata initialpages.json
+python3 manage.py createinitialrevisions
+echo &#39;exec(open(&quot;./setup_users.py&quot;).read())&#39; | python3 manage.py shell
+python3 manage.py runserver</code></pre></li>
+<li>die ersten 5 Zeilen installieren die benötigten Packete
+<ul>
+<li><a href="https://docs.djangoproject.com/">Dokumentation von Django</a></li>
+<li><a href="http://feincms-django-cms.readthedocs.org/">Dokumentation von FeinCMS</a></li>
+<li><a href="https://github.com/etianen/django-reversion">Django-Reversion</a> wird von uns genutzt, um Änderungen an Seiten im Django-Admin rückgängig machen zu können</li>
+<li><a href="https://github.com/django-guardian/django-guardian">Django-Guardian</a> wird von uns genutzt, um bestimmten Nutzern im Django-Admin nur auf bestimmte Seiten (Schreib-)Zugriff zu erlauben</li>
+</ul></li>
+<li>in Zeile 7 clonen wir das Git-Repository und wechseln in den Ordner</li>
+<li>Zeile 9 sorgt dafür, dass die Datenbank-Tabellen entsprechend dem, was in der Django-App konfiguriert werden, angelegt bzw. modifiziert werden
+<ul>
+<li>dieser Befehl ist nochmals auszuführen, wenn sich etwas an der Datenbankstruktur ändern muss aufgrund von Änderungen im Quelltext
+<ul>
+<li>z.B. wenn neue Felder zu Modellen dazukommen</li>
+<li>aber auch z.B. wenn weitere Django-Apps dazukommen</li>
+</ul></li>
+</ul></li>
+<li>der <strong>collectstatic</strong>-Befehl in Zeile 10 sammelt statische Dateien aus allen Django-Apps und Django selbst
+<ul>
+<li>unsere App verwendet weitere Django-Apps, siehe <strong>INSTALLED_APPS</strong> in der Datei <strong>settings.py</strong></li>
+<li>unsere statischen Dateien liegen in <em>/cms/static</em></li>
+<li>collectstatic fügt alles in <em>/static/</em> zusammen</li>
+<li>ergo bitte statische Dateien unbedingt immer in <em>/cms/static</em> ändern und anschließend <strong>collectstatic</strong> ausführen</li>
+<li>nie direkt in <em>/static/</em> etwas ändern, ansonsten gehen die Änderungen verloren!</li>
+</ul></li>
+<li>in Zeile 11 werden Initial-Daten in die Datenbank-Tabellen geschrieben (aus der datei <em>/cms/fixtures/initialpages.json</em>)</li>
+<li>in Zeile 12 werden initiale Revisionen erzeugt (damit sind Einträge in der History im Django-Admin gemeint)</li>
+<li>in Zeile 13 werden Standard-Nutzer angelegt - die entsprechende Datei (<strong>setup_users.py</strong>) bitte unbedingt vorher anpassen!</li>
+<li><p>Zeile 14 startet schließlich Django lokal, Sie können die URL aufrufen, welche in der Konsole angezeigt wird, sie ist nur lokal aufrufbar</p></li>
+</ul>
+<h1 id="ordnerstruktur">Ordnerstruktur</h1>
+<div class="figure">
+<img src="Ordnerstruktur.png" />
+</div>
+<ul>
+<li>der Ordner <em>/django_scrm/</em> enthält Konfigurationsdateien, insb. <strong>settings.py</strong></li>
+<li>im Ordner <em>/cms/</em> befindet sich die eigentliche Django-App
+<ul>
+<li>mit am wichtigsten ist die Datei <strong>models.py</strong>: Hier wird festgelegt, welche Templates mit welchen Content-Types verwendet werden können (siehe dazu auch die Dokumentation von FeinCMS!)</li>
+<li>die eigentlichen Templates befinden sich im Ordner <em>/cms/templates/</em> (zur Syntax siehe <a href="https://docs.djangoproject.com/en/1.9/topics/templates/#the-django-template-language">hier</a>)</li>
+<li><p>sehr wichtig ist auch der Ordner <em>/cms/static</em>:</p>
+<div class="figure">
+<img src="Static1.png" />
+</div>
+<ul>
+<li>CKEditor ist der Richtext-Editor, den wir im Django-Admin für den Content von Seiten verwenden
+<ul>
+<li>sehr wichtig ist die <strong>config.js</strong>-Datei in diesem Ordner - ggf. wollen Sie diese anpassen</li>
+<li>ebenfalls wichtig ist das Plugin <strong>doksoft_templates</strong> (im Ordner <em>/cms/static/ckeditor/plugins/doksoft_templates</em>), welches für den Template-Button im CKeditor zuständig ist</li>
+<li>außerdem haben wir das Plugin <strong>feincms</strong> zur Auswahl von Bildern erstellt (s. <em>/cms/static/ckeditor/plugins/feincms/</em>)</li>
+</ul></li>
+<li>der <strong>flags</strong>-Ordner enthält die Bilddateien für Flaggen zur Sprachauswahl</li>
+<li>bitte beachten, welche der CSS-Dateien im Admin-Bereich, und welche auf der eigentlichen Webseite dargestellt werden (dazu die Templates anschauen!)
+<ul>
+<li><em>derzeit</em> werden auf der Webseite die Dateien <strong>bootstrap.css</strong>, <strong>common.css</strong> und <strong>site.css</strong> eingebunden (s. <em>/cms/templates/default.html</em>)</li>
+<li>im CKEditor werden <strong>bootstrap.css</strong>, <strong>common.css</strong> und <strong>editor.css</strong> eingebunden (s. <em>/cms/static/ckeditor/config.js</em>)</li>
+</ul></li>
+</ul></li>
+<li>in <strong>oldsiteimg</strong> befinden sich sämptliche statischen Dateien (i.d.R. Bilddateien) von der alten Homepage</li>
+<li><p>bei Änderungen in diesem Ordner <strong>collectstatic</strong> nicht vergessen!</p></li>
+</ul></li>
+</ul>
+<h1 id="beispiel-hinzufügen-einer-weiteren-sprache-polnisch">Beispiel: Hinzufügen einer weiteren Sprache (Polnisch)</h1>
+<ul>
+<li><p>Fügen Sie die gewünschte Sprache in der Datei <em>/django_scrm/settings.py</em> unter LANGUAGES ein:</p>
+<pre class="highlight"><code>LANGUAGES = [
+    (&#39;de&#39;, _(&#39;German&#39;)),
+    (&#39;en&#39;, _(&#39;English&#39;)),
+    (&#39;pt-br&#39;, _(&#39;Brazilian Portuguese&#39;)),
+    (&#39;pol&#39;, _(&#39;Polish&#39;))
+]</code></pre></li>
+<li><p>Fügen Sie im Page-Bereich im Django-Admin eine neue Seite hinzu (&quot;Add Page&quot;)</p>
+<div class="figure">
+<img src="Polish1.png" />
+</div>
+<ul>
+<li>als Slug (<strong style="color:red">1</strong>) sollte der Language-Code verwendet werden (hier: &quot;<strong>pol</strong>&quot;)</li>
+<li>wählen Sie die Sprache aus (<strong style="color:red">2</strong>)</li>
+<li>wählen Sie &quot;Redirection&quot; als Template aus (<strong style="color:red">3</strong>)
+<ul>
+<li>bestätigen Sie den Dialog, der beim Wählen des Templates erscheint, mit OK.</li>
+</ul></li>
+<li><p>erstellen Sie eine Übersetzung für das, was die Startseite sein soll (normalerweise Deutsch-&gt;Start)</p>
+<div class="figure">
+<img src="Polish2.png" />
+</div>
+<ul>
+<li>Siehe dazu auch <em>Eine Seite übersetzen</em> in der Nutzer-Dokumentation</li>
+</ul></li>
+<li>gehen Sie zurück auf die Seite mit dem Titel &quot;Polish&quot;, die sie gerade eben angelegt haben und wählen Sie die gerade übersetzte Seite als Seite, auf die weitergeleitet werden soll, aus (<strong style="color:red">3</strong>)
+<ul>
+<li>das bedeutet, wenn jemand z.B. <em>http://localhost:8000/pol/</em> aufruft, wird dieser dann auf diese Startseite weitergeleitet</li>
+</ul></li>
+</ul></li>
+<li>Stellen Sie sicher, dass in dem Ordner <em>/cms/static/flags/</em> eine PNG-Datei mit dem Language-Code als Namen (in dem Fall &quot;<strong>pol.png</strong>&quot;) liegt
+<ul>
+<li><p>führen Sie <strong>collectstatic</strong> aus und starten Sie den Server neu:</p>
+<pre class="highlight"><code>python3 manage.py collectstatic &lt;&lt;&lt; &#39;yes&#39; &amp;&amp; python3 manage.py runserver</code></pre></li>
+</ul></li>
+</ul>

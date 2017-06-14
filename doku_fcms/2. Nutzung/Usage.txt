@@ -1,0 +1,159 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="markdown.css"></link>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+# How to get to the Admin Panel?
+
+- Simply add /admin/ to the URL of the website
+- Example: [http://scrctestv2.wifa.uni-leipzig.de/admin/](http://scrctestv2.wifa.uni-leipzig.de/admin/)
+	
+# 1. Change a Page
+
+## 1.1 Choose the *Pages* Section in the Admin Panel:
+
+![](BearbeitenStep1.png)
+
+## 1.2 Navigate within the Treeview for the desired language:
+
+![](BearbeitenStep2.png)
+
+## 1.3 Choose the Page you want to change:
+
+![](BearbeitenStep3.png)
+
+- You can either choose the Page in the language current language that it belongs to within the Treeview (<strong style="color:red">1</strong>) - in the Screenshot that would be german - or choose one of the translations (<strong style="color:red">2</strong>)
+	- is the link to the translation (<strong style="color:red">2</strong>) greyed out, there doesn't activate a translation yet,
+	 but you can also click on the grey link to create a new translation.
+
+## 1.4 Make the desired changes
+
+![](BearbeitenStep4.png)
+
+- (<strong style="color:red">1</strong>): In this section you can choose a title for the current page
+ (it will appear in the navigation and as the title of the browser window or -tab) as well as a *Slug*, which determines how the URL will look like. For example, if the current page is a sub-page of "Previous events" (Slug: previous-events), which itself is a sub-page of "English" (Slug: "en"), the path within the URL will become **/en/previous-events/&lt;Slug&gt;**.
+	- furthermore, you can decide whether the page should be "Active" (determines, whether the page will be accessible from webbrowsers at all) abd "Navigation"
+	(determines, whether the page will have an entry in the Navigation (not always wanted, for example for most sub-pages))
+
+- (<strong style="color:red">2</strong>): These sections can be expanded by clicking on them and are especially relevant when creating new pages, which is why they will be explained under 2.2 in more detail. In the settings for Search Engine Optimizations (SEO), for example, you can set up keywords and a description relevant for Google/Facebook/etc.
+
+- (<strong style="color:red">3</strong>): here, you can switch between main sections of a page, something that is sometimes overlooked.
+ Most pages are devided into one part with a grey background and another with a white background. For the startpage, there is another section for the Teaser image. Crucial for what main-sections exist is what developers chose in the respective Templates (more on that in the Developer-Documentation).
+
+- (<strong style="color:red">4</strong>): Here you can change the main contents of a page. You can choose between using the Richtext-Editor (WYSIWIG-principle) or switch to the Sourcecode-View (edit the HTML directly).
+
+- (<strong style="color:red">5</strong>): You can add more Contents to the current section - depending on the Template e.g. Forms or oder further Richtext-Fields.
+
+- (<strong style="color:red">6</strong>): When saving, you can choose between...
+	- Save and continue by creating yet another page
+	- Save without leaving the current page
+	- Save and return to the Treeview
+
+- (<strong style="color:red">7</strong>): There is a possibility to view the History of Changes to the current page - important if you want to undo changes (!) - and to view the page like visitors of the website would end up seeing it.
+
+# 2. Create new Pages
+
+## 2.1 Within the *Pages*-Section, Click on *Add Page*
+
+![](AnlegenStep1.png)
+
+## 2.2 Make the desired Changes
+
+![](AnlegenStep2.png)
+
+- (<strong style="color:red">1</strong>): Choose a title, slug and whether the page should be active (meaning accessible by third parties) and visible in the navigation.
+
+- (<strong style="color:red">2</strong>): These sections you can expanded by clicking on the labels:
+
+	- ![](Advanced1.png)
+
+		- **Template:** Choose the template to be used for the current page
+			- Templates are created by Developers (see Developer-Documentation)
+				- they contain rules on how to display sections with their contents on the page, some also handle how the Navigation and the Footer is displayed
+				- do you want a very different way on which main-sections should exist and how the contents are layed out, you can create a new template (preferably in the sourcecode of the Django-App)
+			- for special pages, like the Job-Offer pages, there already are special Templates
+			- the paths /de/, /en/ und /br/ stand for Redirections (to the respective Startpage for each language) and therefore use the Redirect-Template
+			- it is *very* likely, that you simply want to use the Default-Template
+		- **Parent:** Here you set up the parent page, often that will be the root node (German, English or Portuguese)
+			- to change that, click the magnifier-symbol and chosse the page, that the current page should be a sub-page of
+		- the other fields will only be relevant in very special cases
+			- for example, the Startpage has as **Override URL** the path **"/"** - if you want to have another page as the (global) startpage, remove the entry for the current startpage, before you enter **"/"** here
+			
+	- ![](Advanced2.png)
+	
+		- **Require Login:** Hier können Sie einen Nutzer festlegen, der eingeloggt sein muss, um die Seite sehen zu können.
+	
+	- ![](Advanced3.png)
+	
+		- here you can specify keywords and a description text for Search Engines and other Web Crawlers, such as Social Media Sites. For example, the Description Text will be shown when someone clicks on a Facebook - Share button.
+
+- (<strong style="color:red">3</strong>): Here you can switch between Sections of the website.
+	- in the standard template for example, there is a section for a gray and another with a white background.
+ 
+- (<strong style="color:red">4</strong>): Newly created pages will not contain Content yet (or rather Content-Blocks).
+
+- (<strong style="color:red">5</strong>): Here you can add more Content-Blocks.
+
+- (<strong style="color:red">6</strong>): When saving, you can choose between
+	- Save and add another Page with the same type
+	- Save without leaving the current page (continue editing)
+	- Save and return to the Tree-View
+
+# 3. Translate a Page
+
+- To edit an already existing Translation you can follow the instructions under *1. Change a Page*
+
+## 3.1 Anlegen einer neuen Übersetzung:
+
+![](Translate1.png)
+
+- Choose the language, that you want to translate the page into (here for example English).
+
+## 3.2 Check the most relevant Settings
+
+![](Translate2.png)
+
+- (<strong style="color:red">1</strong>): Choose the title of the translations
+
+- (<strong style="color:red">2</strong>): Make shure, the desired parent-page is selected - by default the correct parent-node is already chosen, 
+but sometimes you may want to have the page to be a sub-page of another page.
+ 
+- for everything else the chosen default settings here usually don't need changes.
+
+- (<strong style="color:red">3</strong>): As you can see, by default the checkbox "Copy content from the original" is already checked by default.
+ Click on "Save and continue editing", then the to-be-translated contents should appear.
+
+## 3.3 Translation of the Contents:
+
+![](Translate3.png)
+
+- Usually, Translations are needed for Content und SEO (Keywords and Description)
+
+# 4. Adjusting the Order of the Navigation-Items
+
+![](Move.png)
+
+- You can move a page by clicking and dragging it around within the Tree-View (Drag-and-Drop)
+
+
+# 5. Notes on the Richtext-Editor
+
+![](CK.png)
+
+- (<strong style="color:red">1</strong>): Via Richtext-Templates, you can add basic Layouts (e.g. 3-Column-Layout or Pictures with floating Text)
+	- the view of the page within the Richtext-Editor itself is different from what it will end up looking on the actual Website, which is on purpose so one can better see where a section begins and ends etc., so you have a better overview when editing.
+		- it can be helpfull to regularily try how it looks when browsing the website in another tab
+	- when working with multi-column Layouts it is recommended, to resize the Editor (which you can do by dragging the Edge in the lower right corner).
+
+- (<strong style="color:red">2</strong>): In the Source-View you can change the HTML directly. It is recommended, to copy the HTML-Sourcecode in
+  an actual IDE (Integrated Development Environment) which helps with auto-indentation and proper syntax-highlighting (e.g. PyCharm or Eclipse),
+  especially because the indentation breaks when saving the HTML via the Richtext-Editor and thereby would get confusing.
+	- basicely, the Richtext-Editor is meant for very typical Changes, more complicated things require direct changes in the HTML-Sourcecode
+
+- (<strong style="color:red">3</strong>): The Style-Dropdown offers a selection of Styles for Headlines.
+
+- (<strong style="color:red">4</strong>): You can add pictures. Pictures are managed within the *Media*-Admin-Section
+	- ![](Medien.png)
+	- (Pictures from the old Website are not added to the *Media*-Admin-Section, they are located in the Static-Folder of the Django-App (oldsiteimg))
+	- You can add Pictures to Categories, which you can manage within the *Categories*-Admin-Section

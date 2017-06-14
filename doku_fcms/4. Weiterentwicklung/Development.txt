@@ -1,0 +1,118 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="markdown.css"></link>
+<script src="highlight.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+
+# Basics:
+
+- the Git-Repository is found here [hier](https://gitlab.com/valmynd/django_scrm) - please ask someone who has to invite you as it is not public.
+
+- this tutorial will only cover the basics
+	- often small changes on Templates or static files are sufficient
+	- if that is not enough, please also read the documantation of the used Frameworks (in particular, Django and Feincms)
+	- Shell commands are tried on Ubuntu, for other Operating Systems Adjustments may be needed
+- as IDE [PyCharm](https://www.jetbrains.com/pycharm/) is recommended
+- you can get to run Django locally with the following commands:
+
+	```highlight
+	sudo pip3 install django
+	sudo pip3 install feincms
+	sudo pip3 install django-reversion
+	sudo pip3 install django-guardian
+	sudo pip3 install django-bootstrap-form
+
+	git clone https://gitlab.com/valmynd/django_scrm && cd django_scrm
+
+	python3 manage.py migrate
+	python3 manage.py collectstatic <<< 'yes'
+	python3 manage.py loaddata initialpages.json
+	python3 manage.py createinitialrevisions
+	echo 'exec(open("./setup_users.py").read())' | python3 manage.py shell
+	python3 manage.py runserver
+	```
+
+- die ersten 5 Zeilen installieren die benötigten Packete
+	- [Dokumentation von Django](https://docs.djangoproject.com/)
+	- [Dokumentation von FeinCMS](http://feincms-django-cms.readthedocs.org/)
+	- [Django-Reversion](https://github.com/etianen/django-reversion) wird von uns genutzt, um Änderungen an Seiten im Django-Admin rückgängig machen zu können
+	- [Django-Guardian](https://github.com/django-guardian/django-guardian) wird von uns genutzt, um bestimmten Nutzern im Django-Admin nur auf bestimmte Seiten (Schreib-)Zugriff zu erlauben
+
+- in Zeile 7 clonen wir das Git-Repository und wechseln in den Ordner
+- Zeile 9 sorgt dafür, dass die Datenbank-Tabellen entsprechend dem, was in der Django-App konfiguriert werden, angelegt bzw. modifiziert werden
+	- dieser Befehl ist nochmals auszuführen, wenn sich etwas an der Datenbankstruktur ändern muss aufgrund von Änderungen im Quelltext
+		- z.B. wenn neue Felder zu Modellen dazukommen
+		- aber auch z.B. wenn weitere Django-Apps dazukommen
+- der **collectstatic**-Befehl in Zeile 10 sammelt statische Dateien aus allen Django-Apps und Django selbst
+	- unsere App verwendet weitere Django-Apps, siehe **INSTALLED_APPS** in der Datei **settings.py**
+	- unsere statischen Dateien liegen in */cms/static*
+	- collectstatic fügt alles in */static/* zusammen
+	- ergo bitte statische Dateien unbedingt immer in */cms/static* ändern und anschließend **collectstatic** ausführen
+	- nie direkt in */static/* etwas ändern, ansonsten gehen die Änderungen verloren!
+- in Zeile 11 werden Initial-Daten in die Datenbank-Tabellen geschrieben (aus der datei */cms/fixtures/initialpages.json*)
+- in Zeile 12 werden initiale Revisionen erzeugt (damit sind Einträge in der History im Django-Admin gemeint)
+- in Zeile 13 werden Standard-Nutzer angelegt - die entsprechende Datei (**setup_users.py**) bitte unbedingt vorher anpassen!
+- Zeile 14 startet schließlich Django lokal, Sie können die URL aufrufen, welche in der Konsole angezeigt wird, sie ist nur lokal aufrufbar
+
+# Ordnerstruktur
+
+![](Ordnerstruktur.png)
+
+- der Ordner */django_scrm/* enthält Konfigurationsdateien, insb. **settings.py**
+- im Ordner */cms/* befindet sich die eigentliche Django-App
+	- mit am wichtigsten ist die Datei **models.py**: Hier wird festgelegt, welche Templates mit welchen Content-Types verwendet werden können (siehe dazu auch die Dokumentation von FeinCMS!)
+	- die eigentlichen Templates befinden sich im Ordner */cms/templates/* (zur Syntax siehe [hier](https://docs.djangoproject.com/en/1.9/topics/templates/#the-django-template-language))
+	- sehr wichtig ist auch der Ordner */cms/static*:
+		
+		![](Static1.png)
+		
+		- CKEditor ist der Richtext-Editor, den wir im Django-Admin für den Content von Seiten verwenden
+			- sehr wichtig ist die **config.js**-Datei in diesem Ordner - ggf. wollen Sie diese anpassen
+			- ebenfalls wichtig ist das Plugin **doksoft_templates** (im Ordner */cms/static/ckeditor/plugins/doksoft_templates*), welches für den Template-Button im CKeditor zuständig ist
+			- außerdem haben wir das Plugin **feincms** zur Auswahl von Bildern erstellt (s. */cms/static/ckeditor/plugins/feincms/*)
+		- der **flags**-Ordner enthält die Bilddateien für Flaggen zur Sprachauswahl
+		- bitte beachten, welche der CSS-Dateien im Admin-Bereich, und welche auf der eigentlichen Webseite dargestellt werden (dazu die Templates anschauen!)
+			- *derzeit* werden auf der Webseite die Dateien **bootstrap.css**, **common.css** und **site.css** eingebunden (s. */cms/templates/default.html*)
+			- im CKEditor werden **bootstrap.css**, **common.css** und **editor.css** eingebunden (s. */cms/static/ckeditor/config.js*)
+	- in **oldsiteimg** befinden sich sämptliche statischen Dateien (i.d.R. Bilddateien) von der alten Homepage
+	- bei Änderungen in diesem Ordner **collectstatic** nicht vergessen!
+
+
+# Beispiel: Hinzufügen einer weiteren Sprache (Polnisch)
+
+- Fügen Sie die gewünschte Sprache in der Datei */django_scrm/settings.py* unter LANGUAGES ein:
+
+	```highlight
+	LANGUAGES = [
+		('de', _('German')),
+		('en', _('English')),
+		('pt-br', _('Brazilian Portuguese')),
+		('pol', _('Polish'))
+	]
+	```
+
+- Fügen Sie im Page-Bereich im Django-Admin eine neue Seite hinzu ("Add Page")
+
+	![](Polish1.png)
+
+	- als Slug (<strong style="color:red">1</strong>) sollte der Language-Code verwendet werden (hier: "**pol**")
+	- wählen Sie die Sprache aus (<strong style="color:red">2</strong>)
+	- wählen Sie "Redirection" als Template aus (<strong style="color:red">3</strong>)
+		- bestätigen Sie den Dialog, der beim Wählen des Templates erscheint, mit OK.
+	- erstellen Sie eine Übersetzung für das, was die Startseite sein soll (normalerweise Deutsch->Start)
+
+		![](Polish2.png)
+
+		- Siehe dazu auch *Eine Seite übersetzen* in der Nutzer-Dokumentation
+	- gehen Sie zurück auf die Seite mit dem Titel "Polish", die sie gerade eben angelegt haben und wählen Sie die gerade übersetzte Seite als Seite, auf die weitergeleitet werden soll, aus (<strong style="color:red">3</strong>)
+		- das bedeutet, wenn jemand z.B. *http://localhost:8000/pol/* aufruft, wird dieser dann auf diese Startseite weitergeleitet
+
+- Stellen Sie sicher, dass in dem Ordner */cms/static/flags/* eine PNG-Datei mit dem Language-Code als Namen (in dem Fall "**pol.png**") liegt
+	- führen Sie **collectstatic** aus und starten Sie den Server neu:
+
+		```highlight
+		python3 manage.py collectstatic <<< 'yes' && python3 manage.py runserver
+		```
+
+

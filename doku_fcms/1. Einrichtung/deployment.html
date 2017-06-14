@@ -1,0 +1,147 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" href="markdown.css"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+<h1 id="installieren-von-python-django-und-feincms-auf-windows-server-2012-r2-64bit">Installieren von Python, Django und feinCMS auf Windows Server 2012 R2 64Bit</h1>
+<ol style="list-style-type: decimal">
+<li><p>Git isntallieren:</p>
+<p>1.1 Git <a href="https://git-scm.com/downloads">Download</a></p>
+1.2 Git installieren:
+<div>
+<img src="Git-Install01.png" /> <img src="Git-Install02.png" /> <img src="Git-Install02.png" /> <img src="Git-Install03.png" /> <img src="Git-Install04.png" />
+</div>
+1.3 Git Bash öffnen (rechtsklick)
+<div>
+<img src="Git-Konsole-starten.png" />
+</div>
+<p>1.4 Git testen:</p>
+<pre class="highlight"><code>git --version</code></pre>
+<p>Es sollte jetzt die Gitversion angezeigt werden, falls nicht war die Installation nicht erfolgreich</p></li>
+<li><p>Projekt clonen:</p>
+<p>2.1 Falls noch nicht getan: Registrieren bei bitbucket.org</p>
+<p>2.2 Falls noch nicht getan: Reposity-Einladungen durchführen</p>
+<p>2.3 In den Ordner welchseln wo die Dateien hineinsollen und dort die Git Bash öffnen</p>
+2.4 Projekt auschecken:
+<div>
+<img src="Git-clone.png" />
+</div>
+<pre class="highlight"><code>git clone https://USERNAME@bitbucket.org/folderpath/django_scrm.git</code></pre></li>
+<li><p>Python installieren:</p>
+<p>Python downloaden und installieren: <a href="https://www.python.org/ftp/python/3.5.1/python-3.5.1-amd64.exe">Download Python</a></p>
+Hinweis: Hier wird auch Pip mitinstalliert
+<div>
+<img src="Python-install.png" />
+</div></li>
+<li><p>Django (1.8.7), Django-Reversion und FeinCMS installieren:</p>
+4.1 <strong>manage.py</strong> mit einem Texteditor öffnen und die in Schritt 3 installierte Python-Version angeben
+<div>
+<img src="Django-install.png" />
+</div>
+<p>4.2 Django installieren:</p>
+<pre class="highlight"><code>pip3 install Django==1.8.7</code></pre>
+<p>4.3 FeinCMS installieren:</p>
+<pre class="highlight"><code>    pip3 install feincms</code></pre>
+<div>
+<img src="FeinCMS-install.png" />
+</div>
+<p>4.4 Django-Reversion installieren:</p>
+<pre class="highlight"><code>    pip3 install django-reversion</code></pre>
+<div>
+<img src="Django-reversion-install.png" />
+</div>
+<p>4.5 Django-guardian installieren:</p>
+<pre class="highlight"><code>pip3 install django-guardian</code></pre>
+<p>Regelt die Nutzerzugriffe</p>
+<p>4.6 Django-bootstrap-Formular installieren:</p>
+<pre class="highlight"><code>pip3 install django-bootstrap-form</code></pre></li>
+<li><p>Projekt initiieren:</p>
+<p>5.1 CMD öffnen un in den Ordner wechseln wo die <strong>manage.py</strong> liegt (<em>wurde durch das Clonen erstellt</em>):</p>
+<p>5.2 Lösche folgende Datei: <strong>db.sqlite3</strong></p>
+<p>5.3 Folgende Befehle ausführen (ggf. mit yes bestätigen):</p>
+<pre class="highlight"><code>python manage.py migrate</code></pre>
+<pre class="highlight"><code>python manage.py createsuperuser USERNAME</code></pre>
+<p>gewünschte Emailadresse (kann leer sein) und Passwort wählen</p>
+<pre class="highlight"><code>python manage.py collectstatic</code></pre>
+<pre class="highlight"><code>python manage.py loaddata initialpages.json</code></pre>
+<pre class="highlight"><code>python manage.py createinitialrevisions</code></pre>
+<pre class="highlight"><code>python manage.py shell
+exec(open(&quot;./setup_users.py&quot;).read())</code></pre>
+<p>5.4 Server zum testen starten: <em>Nochimmer in der CMD (wo die mangage.py liegt):</em></p>
+<pre class="highlight"><code>python manage.py runserver</code></pre>
+<p><strong>Im Browser ausführen</strong>: http://localhost:8000/admin/</p></li>
+<li><p>Apachewebserver aufsetzen:</p>
+<p>6.1 Falls noch nicht getan: C++ Redistributable Visual Studio 2015 Update 1 nachholen <a href="https://www.microsoft.com/en-us/download/details.aspx?id=49984">Download</a></p>
+<p>6.2 Download Apache 2.4 VC14 Windows Binaries <a href="http://www.apachelounge.com/download/">Download</a></p>
+<p>6.3 Mod_wsgi runterladen: <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#mod_wsgi">Download</a> --&gt; mod_wsgi-4.4.21+ap24vc14-cp35-none-win_amd64.whl</p>
+<p>Diese Datei installieren:</p>
+<pre class="highlight"><code>pip3 install mod_wsgi-4.4.21+ap24vc14-cp35-none-win_amd64.whl</code></pre>
+<p>Die Ergebnisdatei erscheint dann im Python-Verzeichnis:</p>
+<pre><code>C:\Users\Administrator\AppData\Local\Programs\Python\Python35\mod_wsgi.so</code></pre>
+<p>6.4 Die Ergebnis-Datei von 6.3 in den Moduls Ordner des Apache-Servers verschieben</p>
+<pre><code>z.B.: &quot;C:\httpd-2.4.18-win64-VC14\Apache24\modules\mod_wsgi.so&quot;</code></pre>
+<p>6.5 Füge in die Konfigurationsdatei <strong>&quot;httpd.conf&quot;</strong> <em><code>(C:\httpd-2.4.18-win64-VC14\Apache24\conf\httpd.conf)</code></em> folgende Zeile ein:</p>
+<pre class="highlight"><code>LoadModule wsgi_module sys.prefix\mod_wsgi.so</code></pre>
+<p><strong>Wichtiger Hinweis</strong>: Prüfe auch folgende Zeile: ServerRoot &quot;c:/Apache24&quot; Sollte der Pfad nicht stimme muss entweder der Link oder die Ordner angeglichen werden Hier wird der Ordnerpfad wiefolgt angepasst:</p>
+<pre><code>    Statt: C:\httpd-2.4.18-win64-VC14\Apache24\
+
+    Jetzt: C:\Apache24\conf\</code></pre>
+<p>Port anpassen in der Konfigurationsdatei: an, z.B.:</p>
+<pre class="highlight"><code>Listen 8080</code></pre>
+<p>Füge folgenden Code mit entsprechenden Pfaden in die Konfigurationsdatei am Ende an:</p>
+<pre class="highlight"><code>&lt;Directory &quot;C:/Django_SCRM/django_scrm&gt;
+    Require all granted
+    Options Indexes FollowSymLinks Includes ExecCGI
+    Allow from all
+&lt;/Directory&gt;
+
+&lt;Directory &quot;C:/Django_SCRM/django_scrm/static&quot;&gt;
+    Require all granted
+    Options Indexes FollowSymLinks Includes ExecCGI
+&lt;/Directory&gt;
+
+&lt;Directory &quot;C:/Django_SCRM/django_scrm/media&quot;&gt;
+    Require all granted
+    Options Indexes FollowSymLinks Includes ExecCGI
+&lt;/Directory&gt;
+
+&lt;Directory &quot;C:/Django_SCRM/django_scrm/static/oldsiteimg&quot;&gt;
+    Require all granted
+    Options Indexes FollowSymLinks Includes ExecCGI
+&lt;/Directory&gt;
+
+WSGIScriptAlias / &quot;C:/Django_SCRM/django_scrm/django_scrm/wsgi.py&quot;
+WSGIPythonPath &quot;C:/Django_SCRM/django_scrm&quot;
+
+&lt;Directory &quot;C:/Django_SCRM/django_scrm/&quot;&gt;
+    &lt;Files wsgi.py&gt;
+        Require all granted
+        Options Indexes FollowSymLinks Includes ExecCGI
+        #Allow from all
+    &lt;/Files&gt;
+&lt;/Directory&gt;</code></pre>
+<p>In der <strong>settings.py</strong> sollte folgendes enthalten sein:</p>
+<pre class="highlight"><code># Hosts for Test:
+#ALLOWED_HOSTS = [&#39;127.0.0.1&#39;, &#39;localhost&#39;]
+
+# Host for Production:
+ALLOWED_HOSTS = [&#39;*&#39;]</code></pre>
+<p>Die <strong>wsgi.py</strong> sollte wiefolgt aussehen:</p>
+<pre class="highlight"><code>import os
+from django.core.wsgi import get_wsgi_application
+os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;django_scrm.settings&quot;)
+application = get_wsgi_application()</code></pre>
+<p>6.6 Apache starten</p>
+<pre class="highlight"><code>C:\Apache24\bin&gt;httpd.exe</code></pre></li>
+<li><p>Einbindung von Apache in IIS</p>
+<p>7.1 IIS öffnen <img src="IIS-oeffnen.png" /> 7.2 Eine Seite hinzufügen: <img src="addPage.png" /></p>
+<p>7.3. Wenn die Option URL-Rewrite nicht angezeigt wird muss sie installiert werden Link: <a href="http://www.iis.net/downloads/microsoft/application-request-routing"></a> Ggf. IIS neustarten</p>
+<p>7.4. URL-Rewrite-Icon anklicken <img src="URL-Rewrite.png" /> Auf Regel erstellen kicken. Dann auf reverse Proxy. <img src="ReverseProxy.png" /></p>
+<p>7.5. Sollte hier eine Meldung kommen, dass ARR noch nicht installiert bzw. aktiviert ist: <img src="question.png" /> Dann auf 'ja' klicken und ARRv3 installieren. Ggf. auch wieder IIS neustarten.</p>
+<p>7.6 Sollte eine Meldung kommen, dass die Proxyfunkionen noch nicht aktiviert sind, dann aktivieren: <img src="question2.png" /></p></li>
+<li><p>Alternativ: Server via Django runserver starten: <em>Die Django-Entwickler raten davon ab, dies produktiv zu nutzen, aber es sei sei hier dennoch erwähnt, für den Fall das es garnicht anders geht</em></p>
+<pre class="highlight"><code>python3 manage.py runserver --ipv6 [::\0]:8000</code></pre></li>
+</ol>

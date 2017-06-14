@@ -1,0 +1,186 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" type="text/css" href="markdown.css"></link>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+<h1 id="how-to-get-to-the-admin-panel">How to get to the Admin Panel?</h1>
+<ul>
+<li>Simply add /admin/ to the URL of the website</li>
+<li>Example: <a href="http://scrctestv2.wifa.uni-leipzig.de/admin/" class="uri">http://scrctestv2.wifa.uni-leipzig.de/admin/</a></li>
+</ul>
+<h1 id="change-a-page">1. Change a Page</h1>
+<h2 id="choose-the-pages-section-in-the-admin-panel">1.1 Choose the <em>Pages</em> Section in the Admin Panel:</h2>
+<div class="figure">
+<img src="BearbeitenStep1.png" />
+
+</div>
+<h2 id="navigate-within-the-treeview-for-the-desired-language">1.2 Navigate within the Treeview for the desired language:</h2>
+<div class="figure">
+<img src="BearbeitenStep2.png" />
+
+</div>
+<h2 id="choose-the-page-you-want-to-change">1.3 Choose the Page you want to change:</h2>
+<div class="figure">
+<img src="BearbeitenStep3.png" />
+
+</div>
+<ul>
+<li>You can either choose the Page in the language current language that it belongs to within the Treeview (<strong style="color:red">1</strong>) - in the Screenshot that would be german - or choose one of the translations (<strong style="color:red">2</strong>)
+<ul>
+<li>is the link to the translation (<strong style="color:red">2</strong>) greyed out, there doesn't activate a translation yet, but you can also click on the grey link to create a new translation.</li>
+</ul></li>
+</ul>
+<h2 id="make-the-desired-changes">1.4 Make the desired changes</h2>
+<div class="figure">
+<img src="BearbeitenStep4.png" />
+
+</div>
+<ul>
+<li>(<strong style="color:red">1</strong>): In this section you can choose a title for the current page (it will appear in the navigation and as the title of the browser window or -tab) as well as a <em>Slug</em>, which determines how the URL will look like. For example, if the current page is a sub-page of &quot;Previous events&quot; (Slug: previous-events), which itself is a sub-page of &quot;English&quot; (Slug: &quot;en&quot;), the path within the URL will become <strong>/en/previous-events/&lt;Slug&gt;</strong>.
+<ul>
+<li>furthermore, you can decide whether the page should be &quot;Active&quot; (determines, whether the page will be accessible from webbrowsers at all) abd &quot;Navigation&quot; (determines, whether the page will have an entry in the Navigation (not always wanted, for example for most sub-pages))</li>
+</ul></li>
+<li><p>(<strong style="color:red">2</strong>): These sections can be expanded by clicking on them and are especially relevant when creating new pages, which is why they will be explained under 2.2 in more detail. In the settings for Search Engine Optimizations (SEO), for example, you can set up keywords and a description relevant for Google/Facebook/etc.</p></li>
+<li><p>(<strong style="color:red">3</strong>): here, you can switch between main sections of a page, something that is sometimes overlooked. Most pages are devided into one part with a grey background and another with a white background. For the startpage, there is another section for the Teaser image. Crucial for what main-sections exist is what developers chose in the respective Templates (more on that in the Developer-Documentation).</p></li>
+<li><p>(<strong style="color:red">4</strong>): Here you can change the main contents of a page. You can choose between using the Richtext-Editor (WYSIWIG-principle) or switch to the Sourcecode-View (edit the HTML directly).</p></li>
+<li><p>(<strong style="color:red">5</strong>): You can add more Contents to the current section - depending on the Template e.g. Forms or oder further Richtext-Fields.</p></li>
+<li>(<strong style="color:red">6</strong>): When saving, you can choose between...
+<ul>
+<li>Save and continue by creating yet another page</li>
+<li>Save without leaving the current page</li>
+<li>Save and return to the Treeview</li>
+</ul></li>
+<li><p>(<strong style="color:red">7</strong>): There is a possibility to view the History of Changes to the current page - important if you want to undo changes (!) - and to view the page like visitors of the website would end up seeing it.</p></li>
+</ul>
+<h1 id="create-new-pages">2. Create new Pages</h1>
+<h2 id="within-the-pages-section-click-on-add-page">2.1 Within the <em>Pages</em>-Section, Click on <em>Add Page</em></h2>
+<div class="figure">
+<img src="AnlegenStep1.png" />
+
+</div>
+<h2 id="make-the-desired-changes-1">2.2 Make the desired Changes</h2>
+<div class="figure">
+<img src="AnlegenStep2.png" />
+
+</div>
+<ul>
+<li><p>(<strong style="color:red">1</strong>): Choose a title, slug and whether the page should be active (meaning accessible by third parties) and visible in the navigation.</p></li>
+<li><p>(<strong style="color:red">2</strong>): These sections you can expanded by clicking on the labels:</p>
+<ul>
+<li><div class="figure">
+<img src="Advanced1.png" />
+
+</div>
+<ul>
+<li><strong>Template:</strong> Choose the template to be used for the current page
+<ul>
+<li>Templates are created by Developers (see Developer-Documentation)
+<ul>
+<li>they contain rules on how to display sections with their contents on the page, some also handle how the Navigation and the Footer is displayed</li>
+<li>do you want a very different way on which main-sections should exist and how the contents are layed out, you can create a new template (preferably in the sourcecode of the Django-App)</li>
+</ul></li>
+<li>for special pages, like the Job-Offer pages, there already are special Templates</li>
+<li>the paths /de/, /en/ und /br/ stand for Redirections (to the respective Startpage for each language) and therefore use the Redirect-Template</li>
+<li>it is <em>very</em> likely, that you simply want to use the Default-Template</li>
+</ul></li>
+<li><strong>Parent:</strong> Here you set up the parent page, often that will be the root node (German, English or Portuguese)
+<ul>
+<li>to change that, click the magnifier-symbol and chosse the page, that the current page should be a sub-page of</li>
+</ul></li>
+<li>the other fields will only be relevant in very special cases
+<ul>
+<li>for example, the Startpage has as <strong>Override URL</strong> the path <strong>&quot;/&quot;</strong> - if you want to have another page as the (global) startpage, remove the entry for the current startpage, before you enter <strong>&quot;/&quot;</strong> here</li>
+</ul></li>
+</ul></li>
+<li><div class="figure">
+<img src="Advanced2.png" />
+
+</div>
+<ul>
+<li><strong>Require Login:</strong> Hier können Sie einen Nutzer festlegen, der eingeloggt sein muss, um die Seite sehen zu können.</li>
+</ul></li>
+<li><div class="figure">
+<img src="Advanced3.png" />
+
+</div>
+<ul>
+<li>here you can specify keywords and a description text for Search Engines and other Web Crawlers, such as Social Media Sites. For example, the Description Text will be shown when someone clicks on a Facebook - Share button.</li>
+</ul></li>
+</ul></li>
+<li>(<strong style="color:red">3</strong>): Here you can switch between Sections of the website.
+<ul>
+<li>in the standard template for example, there is a section for a gray and another with a white background.</li>
+</ul></li>
+<li><p>(<strong style="color:red">4</strong>): Newly created pages will not contain Content yet (or rather Content-Blocks).</p></li>
+<li><p>(<strong style="color:red">5</strong>): Here you can add more Content-Blocks.</p></li>
+<li>(<strong style="color:red">6</strong>): When saving, you can choose between
+<ul>
+<li>Save and add another Page with the same type</li>
+<li>Save without leaving the current page (continue editing)</li>
+<li>Save and return to the Tree-View</li>
+</ul></li>
+</ul>
+<h1 id="translate-a-page">3. Translate a Page</h1>
+<ul>
+<li>To edit an already existing Translation you can follow the instructions under <em>1. Change a Page</em></li>
+</ul>
+<h2 id="anlegen-einer-neuen-übersetzung">3.1 Anlegen einer neuen Übersetzung:</h2>
+<div class="figure">
+<img src="Translate1.png" />
+
+</div>
+<ul>
+<li>Choose the language, that you want to translate the page into (here for example English).</li>
+</ul>
+<h2 id="check-the-most-relevant-settings">3.2 Check the most relevant Settings</h2>
+<div class="figure">
+<img src="Translate2.png" />
+
+</div>
+<ul>
+<li><p>(<strong style="color:red">1</strong>): Choose the title of the translations</p></li>
+<li><p>(<strong style="color:red">2</strong>): Make shure, the desired parent-page is selected - by default the correct parent-node is already chosen, but sometimes you may want to have the page to be a sub-page of another page.</p></li>
+<li><p>for everything else the chosen default settings here usually don't need changes.</p></li>
+<li><p>(<strong style="color:red">3</strong>): As you can see, by default the checkbox &quot;Copy content from the original&quot; is already checked by default. Click on &quot;Save and continue editing&quot;, then the to-be-translated contents should appear.</p></li>
+</ul>
+<h2 id="translation-of-the-contents">3.3 Translation of the Contents:</h2>
+<div class="figure">
+<img src="Translate3.png" />
+
+</div>
+<ul>
+<li>Usually, Translations are needed for Content und SEO (Keywords and Description)</li>
+</ul>
+<h1 id="adjusting-the-order-of-the-navigation-items">4. Adjusting the Order of the Navigation-Items</h1>
+<div class="figure">
+<img src="Move.png" />
+
+</div>
+<ul>
+<li>You can move a page by clicking and dragging it around within the Tree-View (Drag-and-Drop)</li>
+</ul>
+<h1 id="notes-on-the-richtext-editor">5. Notes on the Richtext-Editor</h1>
+<div class="figure">
+<img src="CK.png" />
+
+</div>
+<ul>
+<li>(<strong style="color:red">1</strong>): Via Richtext-Templates, you can add basic Layouts (e.g. 3-Column-Layout or Pictures with floating Text)
+<ul>
+<li>the view of the page within the Richtext-Editor itself is different from what it will end up looking on the actual Website, which is on purpose so one can better see where a section begins and ends etc., so you have a better overview when editing.
+<ul>
+<li>it can be helpfull to regularily try how it looks when browsing the website in another tab</li>
+</ul></li>
+<li>when working with multi-column Layouts it is recommended, to resize the Editor (which you can do by dragging the Edge in the lower right corner).</li>
+</ul></li>
+<li>(<strong style="color:red">2</strong>): In the Source-View you can change the HTML directly. It is recommended, to copy the HTML-Sourcecode in an actual IDE (Integrated Development Environment) which helps with auto-indentation and proper syntax-highlighting (e.g. PyCharm or Eclipse), especially because the indentation breaks when saving the HTML via the Richtext-Editor and thereby would get confusing.
+<ul>
+<li>basicely, the Richtext-Editor is meant for very typical Changes, more complicated things require direct changes in the HTML-Sourcecode</li>
+</ul></li>
+<li><p>(<strong style="color:red">3</strong>): The Style-Dropdown offers a selection of Styles for Headlines.</p></li>
+<li>(<strong style="color:red">4</strong>): You can add pictures. Pictures are managed within the <em>Media</em>-Admin-Section
+<ul>
+<li><img src="Medien.png" /></li>
+<li>(Pictures from the old Website are not added to the <em>Media</em>-Admin-Section, they are located in the Static-Folder of the Django-App (oldsiteimg))</li>
+<li>You can add Pictures to Categories, which you can manage within the <em>Categories</em>-Admin-Section</li>
+</ul></li>
+</ul>

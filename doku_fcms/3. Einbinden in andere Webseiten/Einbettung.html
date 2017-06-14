@@ -1,0 +1,21 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" href="markdown.css"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+<h1 id="einbinden-auf-einer-anderen-webseite-via-iframe">Einbinden auf einer anderen Webseite via Iframe</h1>
+<ul>
+<li><p>folgenden HTML-Schnipsel auf einer anderen Webseite einfügen:</p>
+<pre class="highlight"><code>&lt;iframe style=&quot;width: 100%; height: 100%&quot; src=&quot;http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse/?embed=true&quot;&gt;&lt;/iframe&gt;</code></pre>
+<ul>
+<li>anstatt Größe und Breite 100%, können auch beliebige andere Werte gegeben werden, z.B. <strong>style=&quot;width: 700px; height: 200px&quot;</strong></li>
+<li>anstatt <strong>http://scrc.wifa.uni-leipzig.de/de/praktikumsboerse</strong> lassen sich auch beliebige andere URL's angeben, wichtig ist nur das <strong>/?embed=true</strong> am Ende
+<ul>
+<li>das <strong>/?embed=true</strong> am Ende der URL sorgt dafür, dass die Navigationsleiste und der Footer nicht mit zu sehen sind</li>
+<li>sollte es explizit gewünscht sein, dass die Navigationsleiste mit zu sehen ist, lässt sich <strong>/?embed=true</strong> einfach weglassen</li>
+</ul></li>
+</ul></li>
+</ul>

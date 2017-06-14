@@ -1,0 +1,25 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="markdown.css"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script>$.SyntaxHighlighter.init();</script>
+</head>
+<!-- build html via 'pandoc index_de.md -o index_de.html'-->
+
+# Python, Django und feinCMS mit CKEditor auf Windows Server 2012 R2 64Bit
+
+- English:
+	- [Usage](2. Nutzung/usage.html)
+	- [Embedding Pages on other Websites](3. Einbinden in andere Webseiten/Embedding.html)  
+	- [Development](4. Weiterentwicklung/Development.html)
+
+- German:	
+	- [Einrichten](1. Einrichtung/deployment.html)  
+	- [Nutzung](2. Nutzung/Nutzung.html)  
+	- [Einbindung in andere Webseiten](3. Einbinden in andere Webseiten/Einbettung.html)  
+	- [Weiterentwicklung](4. Weiterentwicklung/Entwicklung.html)  
+
+
+
+	

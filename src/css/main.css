@@ -1,0 +1,67 @@
+html, body, canvas {
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font: 1em Helvetica;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 0 1em;
+  height: 3em;
+}
+
+nav > ol {
+  background: white;
+  list-style-type: none;
+  width: 900px;
+  display: flex;
+  padding: 0 0 0 0;
+  align-items: center;
+  color: #2f2442;
+}
+
+li.logo {
+  flex: 1;
+  padding-top: 0.5em;
+}
+
+img.logo {
+  height: 2em;
+}
+
+li.item {
+  padding: 0 0 0 2em;
+}
+
+a, a:active, a:visited, a:hover {
+  text-decoration: none;
+  font-weight: normal;
+  color: #2f2442;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: lightgray;
+}
+
+#speedometer {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1.5em;
+  padding: 0 0.5em;
+  background: #5e5e75;
+  color: grey;
+}

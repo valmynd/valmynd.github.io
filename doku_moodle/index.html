@@ -1,0 +1,119 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> <link rel="stylesheet" type="text/css" href="markdown.css"></link>
+</head>
+<!-- build html via 'pandoc index.md -o index.html'-->
+
+<h1 id="installieren-von-moodle-auf-ubuntu-server-12.04-lts">Installieren von Moodle auf Ubuntu Server 12.04 LTS</h1>
+<ol style="list-style-type: decimal">
+<li><p>Verbinden mit dem Server über SSH:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ssh</span> <span class="kw">&lt;</span>Nutzername<span class="kw">&gt;</span>@<span class="kw">&lt;</span>IP-Adresse<span class="kw">&gt;</span> -L 9090:localhost:9090</code></pre>
+<ul>
+<li>So könnte dies z.B. aussehen:
+<div>
+<img src="connect_ssh.png" />
+</div></li>
+<li>Der Parameter '-L' am Ende sorgt dafür, dass der Port 9090 weitergeleitet wird, da sich Cherokee über das Web-Interface nur über Localhost konfigurieren lässt</li>
+</ul></li>
+<li><p>Installieren der notwendigen Pakete (Cherokee, MySQL, PHP) über die Ubuntu Paketverwaltung:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get <span class="kw">install</span> mysql-server php5 php5-mysql php5-curl php5-cgi php5-xmlrpc php5-gd php5-intl cherokee</code></pre>
+<ul>
+<li>Sie werden während der Installation nach einem Passwort für MySQL gefragt:
+<div>
+<img src="installmysql.png" />
+</div>
+</li>
+</ul></li>
+<li><p>Einrichten einer Datenbank und eines Nutzers für Moodle in MySQL:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">mysql -u root -p
+mysql<span class="kw">&gt;</span> CREATE DATABASE moodle DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+mysql<span class="kw">&gt;</span> create user <span class="st">&#39;moodle&#39;</span>@<span class="st">&#39;localhost&#39;</span> identified by <span class="st">&#39;&lt;Passwort&gt;&#39;</span>;
+mysql<span class="kw">&gt;</span> grant all on moodle.* to moodle@localhost;</code></pre>
+<ul>
+<li>So könnte dies z.B. aussehen:
+<div>
+<img src="create_user_mysql.png" />
+</div>
+</li>
+</ul></li>
+<li><p>Hochladen der Moodle-Dateien auf den Server:</p>
+<ul>
+<li>Die einfachste Möglichkeit ist der Upload über das Programm <a href="http://filezilla-project.org/">Filezilla</a>:
+<div>
+<img src="filezilla.png" />
+</div></li>
+<li><p>Eine wesentlich schnellere und für Entwickler komfortablere Alternative besteht möglicherweise darin, die Daten via SSH-Shell direkt aus einem GIT-Repository zu klonen (mitunter verbieten Firewalleinstellungen dies):</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get <span class="kw">install</span> git <span class="kw">&amp;&amp;</span> git clone https://github.com/kyro46/elateXam.git</code></pre></li>
+</ul></li>
+<li><p>Starten des Cherokee Admin-Webinterfaces:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> cherokee-admin</code></pre>
+<ul>
+<li>Es werden Ihnen die Zugangsdaten und der Link zum Webinterface angezeigt, welche Sie in den Browser kopieren können:
+<div>
+<img src="run_cadmin.png" />
+</div></li>
+<li>Aus Sicherheitsgründen ist der Zugriff auf das Webinterface nur solange möglich, bis Sie den Prozess beenden (beispielsweise mit &lt;Strg&gt;+&lt;C&gt; oder durch einem Reboot).</li>
+<li>Auch wird das Passwort jedes Mal neu generiert, Sie müssen es sich also nicht merken.</li>
+</ul></li>
+<li>Einrichten der PHP-Umgebung in Cherokee:
+<ul>
+<li>Unter VServer-Einstellungen (<strong style="color:red">1</strong>) auf Rule-Management klicken (<strong style="color:red">2</strong>):
+<div>
+<img src="cherokee1.png" />
+</div></li>
+<li>Unter 'Languages' PHP auswählen und hinzufügen:
+<div>
+<img src="cherokee2.png" />
+</div></li>
+<li>Die vordefinierten Behaviours werden nicht gebraucht und können entfernt werden (optional):
+<div>
+<img src="cherokee3.png" />
+</div></li>
+<li>Im Behaviour 'Default' sollte aus Sicherheitsgründen 'Directory Listing' ausgeschaltet werden:
+<div>
+<img src="cherokee_directorylisting.png" />
+</div></li>
+<li>Unter dem Reiter 'Basics' (<strong style="color:red">2</strong>) in den VServer-Einstellungen (<strong style="color:red">1</strong>) sollte sichergestellt werden, dass der Pfad eingestellt ist, in dem Moodle liegt (<strong style="color:red">3</strong>); außerdem sollte eingestellt sein, dass nur PHP-Dateien als Index-Dateien verwendet werden (<strong style="color:red">4</strong>):
+<div>
+<img src="cherokee4.png" />
+</div></li>
+<li>Unter dem Reiter 'Security' (<strong style="color:red">1</strong>) können Sie die Einstellungen für SSL anpassen:
+<div>
+<img src="cherokee_ssl.png" />
+</div></li>
+<li>Zuguterletzt müssen die Einstellungen noch gespeichert (<strong style="color:red">1</strong>) und der Server neu gestartet (<strong style="color:red">2</strong>) werden:
+<div>
+<img src="cherokee_save.png" />
+</div>
+</li>
+</ul></li>
+<li>Einrichten von Moodle:
+<ul>
+<li>Moodle lässt sich nun unter der Adresse des Servers erreichen:
+<div>
+<img src="moodle_step1.png" />
+</div></li>
+<li>Im nächsten Schritt müssen Sie einen Ort für den Ordner <em>moodledata</em> bestimmen:
+<div>
+<img src="moodle_step2.png" />
+</div>
+<ul>
+<li><p>Wichtig ist, dass der Ordner existiert und das der Nutzer <em>www-data</em> Schreibrechte für diesen Ordner besitzt. Dies erreichen Sie mit den folgenden Anweisungen:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> <span class="kw">mkdir</span> <span class="kw">&lt;</span>Pfad-zum-Moodledata-Verzeichnis<span class="kw">&gt;</span>
+<span class="kw">sudo</span> <span class="kw">chown</span> -R www-data <span class="kw">&lt;</span>Pfad-zum-Moodledata-Verzeichnis<span class="kw">&gt;</span></code></pre></li>
+</ul></li>
+<li>Als nächstes müssen die Zugangsdaten für die MySQL-Datenbank eingegeben werden (siehe Abschnitt 3):
+<div>
+<img src="moodle_step3.png" />
+</div></li>
+<li>Aus Sicherheitserwägungen ist es sinnvoll, dem Nutzer <em>www-data</em> <strong>keine</strong> Schreibrechte für den <em>moodle</em>-Ordner zu geben. Im nächsten Schritt muss deshalb eine Datei <em>config.php</em> erstellt werden, in welche die Inhalte, die während der Installation angezeigt werden, hineinkopiert werden:
+<div>
+<img src="moodle_step4.png" />
+</div></li>
+<li>In den darauffolgenden Schritten können Sie die gewünschten Einstellungen vornehmen. Der schwierige Teil ist vorbei.</li>
+</ul></li>
+<li>Wartung des Servers:
+<ul>
+<li><p>Um die Sicherheit zu gewährleisten, sollten in regelmäßigen Abständen Updates durchgeführt werden:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="kw">sudo</span> apt-get upgrade</code></pre></li>
+</ul></li>
+</ol>

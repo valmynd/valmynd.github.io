@@ -72,7 +72,7 @@ main {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   transition: 0.3s;
   display: flex;
@@ -84,20 +84,47 @@ main {
 h1, h2, h2, h3 {
   color: #2f2442;
 }
+
 h2 {
   font-size: 1.2em;
   font-style: oblique;
 
 }
+
 h4 {
   font-size: 1em;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+th {
+  text-align: left;
+  vertical-align: top;
 }
 
-.card-img, .card-img  > img {
+table {
+  border-spacing: 3.2em 1em;
+  border-collapse: separate;
+}
+
+img.social {
+    height: 1em !important;
+    max-height: 1em !important;
+    margin-right: 0.3em;
+}
+
+table, td, img.social {
+  vertical-align: baseline;
+    font-size: 1em;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-nb {
+  box-shadow: none !important;
+}
+
+.card-img, .card-img > img {
   border-radius: 2px 0 0 2px;
   height: 200px;
 }
@@ -113,4 +140,23 @@ h4 {
   justify-content: flex-end;
 }
 
+@media (max-width: 900px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .card-img, .card-img > img {
+    border-radius: 2px 2px 0 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-desc {
+    padding: 0.5em 2em;
+  }
+
+  main {
+    width: 400px;
+  }
+}
 

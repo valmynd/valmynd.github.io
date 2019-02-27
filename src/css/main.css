@@ -120,10 +120,6 @@ table, td, img.social {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.card-nb {
-  box-shadow: none !important;
-}
-
 .card-img, .card-img > img {
   border-radius: 2px 0 0 2px;
   height: 200px;
@@ -156,7 +152,11 @@ table, td, img.social {
   }
 
   main {
-    width: 400px;
+    width: 550px;
+  }
+
+  .card-nb {
+    box-shadow: none !important;
   }
 }
 

@@ -123,6 +123,7 @@ table, td, img.social {
 .card-img, .card-img > img {
   border-radius: 2px 0 0 2px;
   height: 200px;
+  width: 317px;
 }
 
 .card-desc {
